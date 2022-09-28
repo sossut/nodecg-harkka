@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      .monospace {
+        font-family: monospace;
+      }
+      #speakerForm {
+        background-color: #15172b;
+        border-radius: 20px;
+        box-sizing: border-box;
+        height: 400px;
+        padding: 20px;
+        width: 100%;
+      }
+      .input-container {
+        height: 50px;
+        position: relative;
+        width: 100%;
+      }
+      .ic1 {
+        margin-top: 40px;
+      }
+      .ic2 {
+        margin-top: 50px;
+      }
+      #speaker,
+      #title {
+        background-color: #303245;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        font-size: 18px;
+        height: 100%;
+        outline: 0;
+        padding: 4px 20px 0;
+        width: 100%;
+        margin-top: 6px;
+      }
+      button {
+        background-color: #08d;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        cursor: pointer;
+        font-size: 18px;
+        height: 50px;
+        margin-top: 58px;
+        outline: 0;
+        text-align: center;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="speakerForm">
+      <div class="input-container ic1">
+        <label for="speaker" class="placeholder">Puhujan nimi</label>
+        <input type="text" id="speaker" placeholder=" " />
+      </div>
+
+      <div class="input-container ic2">
+        <label for="title" class="placeholder">Puhujan titteli</label>
+        <input type="text" id="title" placeholder=" " />
+      </div>
+
+      <button type="submit">Vaihda nimeä</button>
+    </form>
+
+    <script>
+      const speakerRep = nodecg.Replicant("speakerReplicant");
+      const speaker = document.getElementById("speaker");
+      const titleRep = nodecg.Replicant("titleReplicant");
+      const title = document.getElementById("title");
+      speakerRep.on("change", (newValue, oldValue) => {
+        console.log(`myRep changed from ${oldValue} to ${newValue}`);
+        speaker.value = newValue;
+      });
+      const speakerForm = document.getElementById("speakerForm");
+
+      speakerForm.addEventListener("submit", (e) => {
+        e.preventDefault;
+        speakerRep.value = speaker.value;
+        titleRep.value = title.value;
+      });
+      titleRep.on("change", (newValue, oldValue) => {
+        console.log(`myRep changed from ${oldValue} to ${newValue}`);
+        title.value = newValue;
+      });
+    </script>
+  </body>
+</html>
